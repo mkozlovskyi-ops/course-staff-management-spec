@@ -1,68 +1,100 @@
-# Продукт: <назва продукту>
+# Product: school staff leave portal
 
 <!--
-Варіант docs/. Заповнюйте цей файл, лише якщо обрали зберігати вимоги файлами (див. README репо).
-Якщо ведете вимоги в issues — продукт пишете в issue «Продукт», а цей файл не чіпаєте.
-Редагування у браузері: олівець «Edit this file» → правки → «Commit changes…» → «Commit directly to the main branch».
-Розробники забирають цей файл у свої репо командою /requirements-sync. Такі блоки-коментарі (від «<!» до «>») —
-підказки: на сторінці їх не видно, видаляти не обов'язково.
-Розділи (### …) не перейменовуйте: вони однакові з формою «Продукт».
-Репо публічне: жодних справжніх назв клієнта, імен людей, адрес і сум. Пишіть «школа», «агенція», «практика».
+docs/ variant. Do not rename the ### section headings: they match the "Продукт" form and /requirements-sync relies on
+them. The repo is public: no real client names, people's names, addresses or amounts.
 -->
 
 ### Бачення
 
-<!-- Чия проблема і як її розв'язують зараз; для кого продукт; 2–4 вимірювані ознаки успіху
-(«менеджер бачить усі нові заявки в одному списку»). Не більше пів сторінки. -->
+At the school, staff (teachers, assistants, office staff) ask for leave or for a few hours off verbally or through
+spreadsheets. One employee often holds two positions in different divisions (for example, main position — elementary
+school teacher, additional position — high school math teacher), and each position is approved by its own manager. As a
+result, requests get lost, leave balances are counted by hand, and payroll receives an incomplete list of approved
+absences.
+
+The portal lets an employee request leave for a whole day or for specific hours according to their schedule, lets a
+manager decide only on the positions they are responsible for, and lets the school count balances precisely and keep a
+register of approved leave.
+
+Success indicators:
+
+- An employee requests leave for several dates and both of their positions in one go, without asking a manager
+  verbally.
+- Each manager sees only the records of their own positions in the "Awaiting decision" list and decides on each record
+  separately.
+- Sick leave and Personal leave balances are calculated automatically to 0.01 day and match the approved records.
+- The register of approved leave is produced without manual copying, separately for each division.
 
 ### Користувачі й ролі
 
-<!-- Ідентифікатор ролі — латиницею: розробники беруть його у свої реалізації. Користувачів створює адміністратор:
-листи-запрошення в навчальному проєкті не надсилаються. -->
+Users are created by the administrator: no invitation emails are sent. One person can hold several roles at once: a
+manager or an administrator is also an employee and submits their own requests.
 
-| Роль (ідентифікатор) | Хто це | Як отримує роль |
+| Role (identifier) | Who | How the role is granted |
 |---|---|---|
-| `member` |  |  |
-| `admin` |  | лише інший адміністратор; сам собі роль не змінює |
+| `employee` | Teacher, assistant, office worker: submits own leave requests, sees own schedule and balances | every employee created by the administrator has this role |
+| `manager` | Responsible manager of one or more positions (for example, the elementary school manager); decides on the records of those positions | only the administrator: assigns a person as manager of specific positions |
+| `admin` | School administrator: manages employees, positions, schedules, managers and the school calendar; can decide on any record | only another administrator; cannot change their own role |
 
 ### Матриця прав
 
-<!-- Роль × дія: що кожна роль може робити з кожним об'єктом. У клітинці — «так», «лише власні», «—».
-Кожна клітинка стане правилом доступу й перевіркою в реалізації кожного розробника. -->
-
-| Дія | member | admin |
-|---|---|---|
-| Бачити власний профіль | так | так |
-| Бачити профілі інших | — | так |
-|  |  |  |
+| Action | employee | manager | admin |
+|---|---|---|---|
+| See own schedule, requests and balances | yes | yes | yes |
+| Submit own leave request | yes | yes | yes |
+| Change own record with status "Awaiting decision" or "Returned for revision" | own only | own only | own only |
+| Submit a request on behalf of another employee | — | only employees of own positions | yes |
+| See other employees' leave records | — | only records of own positions | yes |
+| Approve, reject, return for revision or cancel a record | — | only records of own positions, never own records | yes |
+| See other employees' balances | — | only employees of own positions | yes |
+| See the school calendar | yes | yes | yes |
+| Change the school calendar (days off, holidays, early dismissals) | — | — | yes |
+| Create employees, positions, schedules; assign managers and deputies | — | — | yes |
+| Maintain an employee's substitute list | — | only employees of own positions | yes |
+| See the register of approved leave | — | only employees of own positions | yes |
+| See salaries or pay rates | — | — | — |
 
 ### Глосарій
 
-<!-- 8–15 термінів, кожен із «Не вживаємо». Один термін — одне значення в усіх вимогах. Синоніми — у «Не вживаємо». -->
-
-| Термін | Визначення | Не вживаємо |
+| Term | Definition | Do not use |
 |---|---|---|
-|  |  |  |
+| Employee | A person who works at the school and has at least one position | staff member, user, personnel |
+| Position | A paid position of an employee: type (main or additional), division, job title (teacher, assistant…), its own weekly schedule and one or more responsible managers | assignment, rate, slot, role (role means portal access only) |
+| Main / additional position | The type of a position. An employee has exactly one main position and zero or more additional ones | primary, secondary, second job |
+| Division | The part of the school a position belongs to (for example, elementary school, high school, early childhood) | department, faculty, school (school means the whole institution) |
+| Schedule | The weekly working hours of a position: any number of time blocks per weekday, with gaps between blocks allowed | timetable, roster |
+| Working day | A date on which the position's schedule has at least one block and which is not closed in the school calendar | business day, weekday |
+| Leave request | One submission by an employee: one or more dates and one or more positions | application, ticket |
+| Leave record | The part of a request for one position on one date with specific hours; decisions are made on records | row, slot, item |
+| Leave type | Sick leave, Personal leave, Unpaid leave, Family celebration | leave kind, category |
+| Record status | "Awaiting decision", "Approved", "Rejected", "Returned for revision", "Cancelled" | state, stage, pending |
+| Balance | How many days of Sick leave or Personal leave the employee can still use in the school year, including carried-over days | limit, quota, allowance |
+| School year | The period over which the balance is counted; unused days carry over to the next school year | calendar year, season |
+| Responsible manager | A manager assigned by the administrator to a position; receives that position's records | supervisor, boss, administrator |
+| Substitute | An employee who covers for the absent person during a record | deputy (a deputy is a manager, see below), cover |
+| Deputy manager | A manager temporarily assigned by the administrator in place of an absent manager for a date range | substitute manager, backup |
 
 ### Roadmap зрізів
 
-<!-- Зріз — шматок продукту, який можна показати користувачу. По зрізу на кожне заняття WS6–WS11, одним реченням.
-Перший зріз — до кінця 16.10. У «Вимоги» — назви файлів з docs/requirements/. -->
-
-| Заняття | Зріз (що зможе користувач) | Вимоги | Статус |
+| Session | Slice (what the user will be able to do) | Requirements | Status |
 |---|---|---|---|
-| WS6 |  |  | у роботі |
-| WS7 |  |  | заплановано |
-| WS8 |  |  | заплановано |
-| WS9 |  |  | заплановано |
-| WS10 |  |  | заплановано |
-| WS11 |  |  | заплановано |
+| WS6 | An employee requests leave according to their schedule, a manager decides on each record, and the employee sees their balance | `01-leave-request.md`, `02-leave-decision.md`, `03-leave-balance.md` | in progress |
+| WS7 | The administrator closes days and hours in the school calendar (holidays, early dismissals), and they cannot be taken as leave | — | planned |
+| WS8 | An employee chooses a substitute for each record, and an assistant can temporarily replace a teacher with an upgrade | — | planned |
+| WS9 | The administrator views and downloads the register of approved leave separately for each division | — | planned |
+| WS10 | The administrator manages employees, positions, schedules, managers and deputy managers | — | planned |
+| WS11 | A manager submits a request on behalf of an employee and edits a record's date, hours, leave type or substitute before deciding, and an employee gets a reminder about long Personal leave and cancels an approved record through the manager | — | planned |
 
 ### Що поза scope
 
-<!-- Що продукт свідомо НЕ робить. Перші два пункти — обмеження безкоштовних тарифів, на яких працюють розробники;
-допишіть свої. -->
-
-- Листи користувачам: у розробників безкоштовна пошта — 2 листи на годину і лише учасникам їхнього проєкту.
-  Нагадування — позначка в застосунку, «запрошення» — посилання від адміністратора.
-- Дії за розкладом частіше ніж раз на добу.
+- Emails to users: developers' free mail plan allows only 2 emails per hour and only to members of their project.
+  Reminders are an in-app marker; an "invitation" is a link from the administrator.
+- Scheduled actions more often than once a day.
+- Salaries, pay rates and payroll calculation: the portal neither stores nor shows them; payroll keeps them
+  separately.
+- Approving a record from an email or a message: decisions are made only in the portal.
+- Mobile layout: the portal is designed for a computer.
+- Migrating historical leave records from the previous system.
+- A voice assistant for submitting requests.
+- Verifying that the employee actually spoke with the administrator before long Personal leave: reminder only.
