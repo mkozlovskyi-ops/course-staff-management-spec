@@ -1,11 +1,10 @@
 # Product: school staff leave portal
 
 <!--
-docs/ variant. Do not rename the ### section headings: they match the "Продукт" form and /requirements-sync relies on
-them. The repo is public: no real client names, people's names, addresses or amounts.
+docs/ variant. Do not rename the ### section headings: developers compare versions by them. The repo is public: no real client names, people's names, addresses or amounts.
 -->
 
-### Бачення
+### Vision
 
 At the school, staff (teachers, assistants, office staff) ask for leave or for a few hours off verbally or through
 spreadsheets. One employee often holds two positions in different divisions (for example, main position — elementary
@@ -26,7 +25,7 @@ Success indicators:
 - Sick leave and Personal leave balances are calculated automatically to 0.01 day and match the approved records.
 - The register of approved leave is produced without manual copying, separately for each division.
 
-### Користувачі й ролі
+### Users and roles
 
 Users are created by the administrator: no invitation emails are sent. One person can hold several roles at once: a
 manager or an administrator is also an employee and submits their own requests.
@@ -37,7 +36,7 @@ manager or an administrator is also an employee and submits their own requests.
 | `manager` | Responsible manager of one or more positions (for example, the elementary school manager); decides on the records of those positions | only the administrator: assigns a person as manager of specific positions |
 | `admin` | School administrator: manages employees, positions, schedules, managers and the school calendar; can decide on any record | only another administrator; cannot change their own role |
 
-### Матриця прав
+### Permission matrix
 
 | Action | employee | manager | admin |
 |---|---|---|---|
@@ -55,7 +54,7 @@ manager or an administrator is also an employee and submits their own requests.
 | See the register of approved leave | — | only employees of own positions | yes |
 | See salaries or pay rates | — | — | — |
 
-### Глосарій
+### Glossary
 
 | Term | Definition | Do not use |
 |---|---|---|
@@ -75,7 +74,7 @@ manager or an administrator is also an employee and submits their own requests.
 | Substitute | An employee who covers for the absent person during a record | deputy (a deputy is a manager, see below), cover |
 | Deputy manager | A manager temporarily assigned by the administrator in place of an absent manager for a date range | substitute manager, backup |
 
-### Roadmap зрізів
+### Slice roadmap
 
 | Session | Slice (what the user will be able to do) | Requirements | Status |
 |---|---|---|---|
@@ -86,7 +85,7 @@ manager or an administrator is also an employee and submits their own requests.
 | WS10 | The administrator manages employees, positions, schedules, managers and deputy managers | — | planned |
 | WS11 | A manager submits a request on behalf of an employee and edits a record's date, hours, leave type or substitute before deciding, and an employee gets a reminder about long Personal leave and cancels an approved record through the manager | — | planned |
 
-### Що поза scope
+### Out of scope
 
 - Emails to users: developers' free mail plan allows only 2 emails per hour and only to members of their project.
   Reminders are an in-app marker; an "invitation" is a link from the administrator.

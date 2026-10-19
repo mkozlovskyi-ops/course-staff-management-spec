@@ -29,7 +29,7 @@ Leave balances, the over-balance warning and the Personal/Unpaid split at approv
   decision' or 'Returned for revision' — own only" → Requirement 4.
 - Removes the "who approves?" ambiguity for employees with two positions: each position's record goes to that
   position's managers only.
-- Out of scope (PM "Поза межами"): a manager editing a record before deciding and cancelling approved records (WS11),
+- Out of scope (PM "Out of scope"): a manager editing a record before deciding and cancelling approved records (WS11),
   deputy managers (WS10), the balance warning (spec-3), the school-calendar conflict warning (WS7), emails, and
   approving all records of a request in one action.
 
@@ -116,7 +116,7 @@ managers only decide what I actually need.
 
 ## Business Rules from PM Assumptions
 
-These are confirmed PM assumptions (`02-leave-decision.md`, "Припущення"). They are not separate acceptance criteria
+These are confirmed PM assumptions (`02-leave-decision.md`, "Assumptions"). They are not separate acceptance criteria
 but every implementation and test must respect them.
 
 - **BR-1 Statuses.** The five statuses "Awaiting decision", "Approved", "Rejected", "Returned for revision",
