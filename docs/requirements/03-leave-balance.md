@@ -31,22 +31,22 @@ from approved records, consistently for whole days and hours, and warns when a r
 
 ### Критерії приймання
 
-- AC-BALANCE-01: Given an employee with no approved records in school year 2026–2027 and no carried-over days. When the employee views their balances. Then the employee sees: "Sick leave" — granted 18.00, used 0.00, remaining 18.00; "Personal leave" — granted 18.00, used 0.00, remaining 18.00; "Unpaid leave" and "Family celebration" — used 0.00 only.
-- AC-BALANCE-02: Given an employee with a Sick leave balance of 18.00 and a main position with the schedule Tue 08:30–15:30. When the manager approves a "Sick leave" record for the whole day 2026-11-03. Then used is 1.00, remaining 17.00.
-- AC-BALANCE-03: Given an employee with a Sick leave balance of 18.00 and a single position with the schedule Tue 08:30–15:30 (7 h). When the manager approves a "Sick leave" record on 2026-11-03 from 09:00 to 11:30 (2 h 30 min). Then used is 0.36 (150 min of 420 min), remaining 17.64.
-- AC-BALANCE-04: Given an employee with a Personal leave balance of 18.00 and a whole-day "Personal leave" record with status "Awaiting decision". When the employee views their balances. Then "Personal leave" — used 0.00, remaining 18.00.
-- AC-BALANCE-05: Given an employee with a main position (Mon 08:30–15:30) and an additional position (Mon 15:45–17:00). When the managers approve both whole-day "Personal leave" records on 2026-11-02. Then used is 1.00, not 2.00.
-- AC-BALANCE-06: Given an employee with a main position (Mon 08:30–15:30, 420 min) and an additional position (Mon 15:45–17:00, 75 min). When the manager approves a whole-day "Personal leave" record for the additional position only on 2026-11-02. Then used is 0.15 (75 min of the employee's 495 working minutes that day).
-- AC-BALANCE-07: Given an employee with a Sick leave balance of 18.00 and a whole-day "Sick leave" record with status "Awaiting decision". When the manager rejects this record. Then "Sick leave" — used 0.00, remaining 18.00.
-- AC-BALANCE-08: Given an employee with a Personal leave balance of 0.50 and a position with the schedule Tue 08:30–15:30. When the employee requests "Personal leave" for the whole day 2026-11-03. Then the request is created, and the employee sees the warning "Your Personal leave balance is 0.50 day. Another 0.50 day will be counted as Unpaid leave".
-- AC-BALANCE-09: Given a whole-day "Personal leave" record with status "Awaiting decision" of an employee whose "Personal leave" shows used 17.50, remaining 0.50. When the manager opens the record. Then the manager sees the warning "This request exceeds the Personal leave balance (0.50 day). Suggested: 0.50 day Personal leave, 0.50 day Unpaid leave".
-- AC-BALANCE-10: Given the record from AC-BALANCE-09 and the employee's "Unpaid leave" used 0.00. When the manager approves it with the suggested split. Then "Personal leave" — used 18.00, remaining 0.00; "Unpaid leave" — used 0.50.
-- AC-BALANCE-11: Given an employee who has 5.00 days of Sick leave left on 2027-08-31 from school year 2026–2027. When the employee views their balances on 2027-09-01. Then "Sick leave" in school year 2027–2028 — granted 18.00, carried over 5.00, remaining 23.00.
-- AC-BALANCE-12: Given employee teacher1@example.test has no positions managed by manager1@example.test. When manager1@example.test tries to view the balances of teacher1@example.test. Then the balances are not shown.
-- AC-BALANCE-13: Given employee teacher1@example.test. When teacher1@example.test tries to view another employee's balances. Then the balances are not shown.
-- AC-BALANCE-14: Given an employee whose "Personal leave" shows remaining 1.50, a position with the schedule Mon–Fri 08:30–15:30, and two whole-day "Personal leave" records on 2026-11-03 and 2026-11-04 with status "Awaiting decision". When the manager approves the 2026-11-03 record and then opens the 2026-11-04 record. Then the manager sees the warning "This request exceeds the Personal leave balance (0.50 day). Suggested: 0.50 day Personal leave, 0.50 day Unpaid leave".
-- AC-BALANCE-15: Given an employee whose "Personal leave" shows remaining 0.20 and a single position with the schedule Tue 08:30–15:30 (420 min). When the employee requests "Personal leave" on 2026-11-03 from 09:00 to 11:30 (0.36 day). Then the request is created, and the employee sees the warning "Your Personal leave balance is 0.20 day. Another 0.16 day will be counted as Unpaid leave".
-- AC-BALANCE-16: Given the record from AC-BALANCE-09. When the manager tries to approve it entirely as "Personal leave" without the split. Then the record is not approved, and the manager sees the message "The Personal leave balance is 0.50 day: approve with the suggested split or reject".
+- AC-BALANCE-01: Дано an employee with no approved records in school year 2026–2027 and no carried-over days. Коли the employee views their balances. Тоді the employee sees: "Sick leave" — granted 18.00, used 0.00, remaining 18.00; "Personal leave" — granted 18.00, used 0.00, remaining 18.00; "Unpaid leave" and "Family celebration" — used 0.00 only.
+- AC-BALANCE-02: Дано an employee with a Sick leave balance of 18.00 and a main position with the schedule Tue 08:30–15:30. Коли the manager approves a "Sick leave" record for the whole day 2026-11-03. Тоді used is 1.00, remaining 17.00.
+- AC-BALANCE-03: Дано an employee with a Sick leave balance of 18.00 and a single position with the schedule Tue 08:30–15:30 (7 h). Коли the manager approves a "Sick leave" record on 2026-11-03 from 09:00 to 11:30 (2 h 30 min). Тоді used is 0.36 (150 min of 420 min), remaining 17.64.
+- AC-BALANCE-04: Дано an employee with a Personal leave balance of 18.00 and a whole-day "Personal leave" record with status "Awaiting decision". Коли the employee views their balances. Тоді "Personal leave" — used 0.00, remaining 18.00.
+- AC-BALANCE-05: Дано an employee with a main position (Mon 08:30–15:30) and an additional position (Mon 15:45–17:00). Коли the managers approve both whole-day "Personal leave" records on 2026-11-02. Тоді used is 1.00, not 2.00.
+- AC-BALANCE-06: Дано an employee with a main position (Mon 08:30–15:30, 420 min) and an additional position (Mon 15:45–17:00, 75 min). Коли the manager approves a whole-day "Personal leave" record for the additional position only on 2026-11-02. Тоді used is 0.15 (75 min of the employee's 495 working minutes that day).
+- AC-BALANCE-07: Дано an employee with a Sick leave balance of 18.00 and a whole-day "Sick leave" record with status "Awaiting decision". Коли the manager rejects this record. Тоді "Sick leave" — used 0.00, remaining 18.00.
+- AC-BALANCE-08: Дано an employee with a Personal leave balance of 0.50 and a position with the schedule Tue 08:30–15:30. Коли the employee requests "Personal leave" for the whole day 2026-11-03. Тоді the request is created, and the employee sees the warning "Your Personal leave balance is 0.50 day. Another 0.50 day will be counted as Unpaid leave".
+- AC-BALANCE-09: Дано a whole-day "Personal leave" record with status "Awaiting decision" of an employee whose "Personal leave" shows used 17.50, remaining 0.50. Коли the manager opens the record. Тоді the manager sees the warning "This request exceeds the Personal leave balance (0.50 day). Suggested: 0.50 day Personal leave, 0.50 day Unpaid leave".
+- AC-BALANCE-10: Дано the record from AC-BALANCE-09 and the employee's "Unpaid leave" used 0.00. Коли the manager approves it with the suggested split. Тоді "Personal leave" — used 18.00, remaining 0.00; "Unpaid leave" — used 0.50.
+- AC-BALANCE-11: Дано an employee who has 5.00 days of Sick leave left on 2027-08-31 from school year 2026–2027. Коли the employee views their balances on 2027-09-01. Тоді "Sick leave" in school year 2027–2028 — granted 18.00, carried over 5.00, remaining 23.00.
+- AC-BALANCE-12: Дано employee teacher1@example.test has no positions managed by manager1@example.test. Коли manager1@example.test tries to view the balances of teacher1@example.test. Тоді the balances are not shown.
+- AC-BALANCE-13: Дано employee teacher1@example.test. Коли teacher1@example.test tries to view another employee's balances. Тоді the balances are not shown.
+- AC-BALANCE-14: Дано an employee whose "Personal leave" shows remaining 1.50, a position with the schedule Mon–Fri 08:30–15:30, and two whole-day "Personal leave" records on 2026-11-03 and 2026-11-04 with status "Awaiting decision". Коли the manager approves the 2026-11-03 record and then opens the 2026-11-04 record. Тоді the manager sees the warning "This request exceeds the Personal leave balance (0.50 day). Suggested: 0.50 day Personal leave, 0.50 day Unpaid leave".
+- AC-BALANCE-15: Дано an employee whose "Personal leave" shows remaining 0.20 and a single position with the schedule Tue 08:30–15:30 (420 min). Коли the employee requests "Personal leave" on 2026-11-03 from 09:00 to 11:30 (0.36 day). Тоді the request is created, and the employee sees the warning "Your Personal leave balance is 0.20 day. Another 0.16 day will be counted as Unpaid leave".
+- AC-BALANCE-16: Дано the record from AC-BALANCE-09. Коли the manager tries to approve it entirely as "Personal leave" without the split. Тоді the record is not approved, and the manager sees the message "The Personal leave balance is 0.50 day: approve with the suggested split or reject".
 
 ### Поза межами
 
@@ -75,15 +75,17 @@ from approved records, consistently for whole days and hours, and warns when a r
 
 ### Відкриті питання
 
-None.
+Немає
 
 ### Журнал змін
 
 - 2026-10-19 — created
-- 2026-10-19 — added AC-BALANCE-14 and an assumption: the manager's warning uses the balance at decision time (spec-workflow review, G5/Q2)
-- 2026-10-19 — added AC-BALANCE-15: exceeding the balance with a partial day (spec-workflow review, G6)
-- 2026-10-19 — AC-BALANCE-10: "0.50 higher than before" replaced with a concrete starting value and result (spec-workflow review, G7)
-- 2026-10-19 — added AC-BALANCE-16; open question "approve entirely as paid" answered: no, only the split or reject (spec-workflow review, Q3)
-- 2026-10-19 — open question answered: 18 days of Sick leave and 18 days of Personal leave per school year — confirmed in Assumptions
-- 2026-10-19 — open question answered: the share of a day is calculated from the combined schedule of all the employee's positions on that date (as in AC-BALANCE-06) — confirmed in Assumptions
-- 2026-10-19 — open question answered: school year 1 September–31 August — confirmed in Assumptions
+- 2026-10-19 — added AC-BALANCE-14 and an assumption: the manager's warning uses the balance at decision time — власне рішення PM
+- 2026-10-19 — added AC-BALANCE-15: exceeding the balance with a partial day — власне рішення PM
+- 2026-10-19 — AC-BALANCE-10: "0.50 higher than before" replaced with a concrete starting value and result — власне рішення PM
+- 2026-10-19 — added AC-BALANCE-16; open question "approve entirely as paid" answered: no, only the split or reject — власне рішення PM
+- 2026-10-19 — open question answered: 18 days of Sick leave and 18 days of Personal leave per school year — confirmed in Assumptions — власне рішення PM
+- 2026-10-19 — open question answered: the share of a day is calculated from the combined schedule of all the employee's positions on that date (as in AC-BALANCE-06) — confirmed in Assumptions — власне рішення PM
+- 2026-10-19 — open question answered: school year 1 September–31 August — confirmed in Assumptions — власне рішення PM
+- 2026-10-19 — усі AC: ключові слова Given/When/Then замінено на Дано/Коли/Тоді за форматом шаблону, зміст і ID без змін — власне рішення PM
+- 2026-10-19 — Перевірено за чеклістом: 1–20 так. Виправлено: додано AC-BALANCE-14, -15, -16 (залишок у момент рішення, частина дня, лише з поділом); AC-BALANCE-10 отримав конкретні числа. Лишили свідомо: 16 AC — більше за орієнтир 6–10; AC-BALANCE-01 перевіряє один екран залишків із кількома числами. AI-чат: ні.

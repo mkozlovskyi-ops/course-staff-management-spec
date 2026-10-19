@@ -35,22 +35,22 @@ and each position gets its own record that goes to that position's manager.
 
 ### Критерії приймання
 
-- AC-LEAVE-01: Given an employee with main position "Elementary school / Teacher", schedule Mon–Fri 08:30–15:30. When the employee requests "Sick leave" for the whole day on Monday 2026-11-02 and confirms the summary. Then 1 leave record is created: position "Elementary school / Teacher", 2026-11-02, 08:30–15:30, type "Sick leave", status "Awaiting decision".
-- AC-LEAVE-02: Given an employee with main position "Elementary school / Teacher" (Mon 08:30–15:30) and additional position "High school / Math teacher" (Mon 15:45–17:00). When the employee requests the whole day 2026-11-02 with both positions included. Then 2 records are created in one request: 08:30–15:30 for the main position and 15:45–17:00 for the additional position, both with status "Awaiting decision".
-- AC-LEAVE-03: Given the employee with two positions from AC-LEAVE-02. When the employee requests 2026-11-02 and excludes the additional position. Then only 1 record is created — for the main position — and there is no record for the additional position.
-- AC-LEAVE-04: Given an employee with a main position, schedule Mon–Fri 08:30–15:30. When the employee requests "Personal leave" on 2026-11-02 from 09:00 to 11:30. Then 1 record 2026-11-02 09:00–11:30 is created with a duration of 2 h 30 min.
-- AC-LEAVE-05: Given an employee with a main position, schedule Mon–Fri 08:30–15:30. When the employee requests the dates 2026-11-02 and 2026-11-03, whole day. Then 2 records are created (one per date), both belonging to the same request.
-- AC-LEAVE-06: Given an employee whose position has no Saturday in its schedule. When the employee tries to choose Saturday 2026-11-07. Then the date is not accepted, and the employee sees the message "You have no working hours on this day".
-- AC-LEAVE-07: Given a position with the schedule block 08:30–13:00. When the employee enters the hours 08:00–10:00. Then no request is created, and the employee sees the message "Hours must be within your schedule: 08:30–13:00".
-- AC-LEAVE-08: Given a position with the schedule block 08:30–13:00. When the employee enters 13:00 as the start. Then no request is created, and the employee sees the message "13:00 is the end of working time and can only be chosen as the end of leave".
-- AC-LEAVE-09: Given a position with the schedule 08:30–15:30. When the employee enters the hours from 11:00 to 10:00. Then no request is created, and the employee sees the message "The end must be later than the start".
-- AC-LEAVE-10: Given the employee chose the date 2026-11-02 and excluded all positions. When the employee tries to submit the request. Then no request is created, and the employee sees the message "Choose at least one position".
-- AC-LEAVE-11: Given the employee filled in a request for 2 dates and sees the summary. When the employee does not confirm the summary and goes back to editing. Then no record is created, and the entered dates and hours are kept for editing.
-- AC-LEAVE-12: Given the employee chose the type "Family celebration". When the employee submits the request without stating the relationship. Then no request is created, and the employee sees the message "State your relationship to this person: sibling, child, parent, grandchild or grandparent. Not applicable to cousins, friends, neighbours or siblings-in-law".
-- AC-LEAVE-13: Given the employee already has a main-position record 2026-11-02 09:00–11:00 with status "Awaiting decision". When the employee requests the same position on 2026-11-02 10:00–12:00. Then no request is created, and the employee sees the message "You already have a request for this time: 2026-11-02 09:00–11:00".
-- AC-LEAVE-14: Given employee teacher1@example.test has 2 records and employee teacher2@example.test has 3 records. When teacher1@example.test opens "My requests". Then the list contains exactly 2 records — only their own — each with date, hours, position, leave type and status.
-- AC-LEAVE-15: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee requests "Personal leave" on 2026-11-03 from 11:00 to 13:00. Then 1 record 2026-11-03 11:00–13:00 is created with a duration of 1 h 30 min (the gap 12:00–12:30 is not counted).
-- AC-LEAVE-16: Given the employee already has a main-position record 2026-11-03 09:00–11:00 with status "Awaiting decision". When the employee confirms a whole-day request for 2026-11-02 and 2026-11-03. Then no record is created for either date, and the employee sees the message "You already have a request for this time: 2026-11-03 09:00–11:00".
+- AC-LEAVE-01: Дано an employee with main position "Elementary school / Teacher", schedule Mon–Fri 08:30–15:30. Коли the employee requests "Sick leave" for the whole day on Monday 2026-11-02 and confirms the summary. Тоді 1 leave record is created: position "Elementary school / Teacher", 2026-11-02, 08:30–15:30, type "Sick leave", status "Awaiting decision".
+- AC-LEAVE-02: Дано an employee with main position "Elementary school / Teacher" (Mon 08:30–15:30) and additional position "High school / Math teacher" (Mon 15:45–17:00). Коли the employee requests the whole day 2026-11-02 with both positions included. Тоді 2 records are created in one request: 08:30–15:30 for the main position and 15:45–17:00 for the additional position, both with status "Awaiting decision".
+- AC-LEAVE-03: Дано the employee with two positions from AC-LEAVE-02. Коли the employee requests 2026-11-02 and excludes the additional position. Тоді only 1 record is created — for the main position — and there is no record for the additional position.
+- AC-LEAVE-04: Дано an employee with a main position, schedule Mon–Fri 08:30–15:30. Коли the employee requests "Personal leave" on 2026-11-02 from 09:00 to 11:30. Тоді 1 record 2026-11-02 09:00–11:30 is created with a duration of 2 h 30 min.
+- AC-LEAVE-05: Дано an employee with a main position, schedule Mon–Fri 08:30–15:30. Коли the employee requests the dates 2026-11-02 and 2026-11-03, whole day. Тоді 2 records are created (one per date), both belonging to the same request.
+- AC-LEAVE-06: Дано an employee whose position has no Saturday in its schedule. Коли the employee tries to choose Saturday 2026-11-07. Тоді the date is not accepted, and the employee sees the message "You have no working hours on this day".
+- AC-LEAVE-07: Дано a position with the schedule block 08:30–13:00. Коли the employee enters the hours 08:00–10:00. Тоді no request is created, and the employee sees the message "Hours must be within your schedule: 08:30–13:00".
+- AC-LEAVE-08: Дано a position with the schedule block 08:30–13:00. Коли the employee enters 13:00 as the start. Тоді no request is created, and the employee sees the message "13:00 is the end of working time and can only be chosen as the end of leave".
+- AC-LEAVE-09: Дано a position with the schedule 08:30–15:30. Коли the employee enters the hours from 11:00 to 10:00. Тоді no request is created, and the employee sees the message "The end must be later than the start".
+- AC-LEAVE-10: Дано the employee chose the date 2026-11-02 and excluded all positions. Коли the employee tries to submit the request. Тоді no request is created, and the employee sees the message "Choose at least one position".
+- AC-LEAVE-11: Дано the employee filled in a request for 2 dates and sees the summary. Коли the employee does not confirm the summary and goes back to editing. Тоді no record is created, and the entered dates and hours are kept for editing.
+- AC-LEAVE-12: Дано the employee chose the type "Family celebration". Коли the employee submits the request without stating the relationship. Тоді no request is created, and the employee sees the message "State your relationship to this person: sibling, child, parent, grandchild or grandparent. Not applicable to cousins, friends, neighbours or siblings-in-law".
+- AC-LEAVE-13: Дано the employee already has a main-position record 2026-11-02 09:00–11:00 with status "Awaiting decision". Коли the employee requests the same position on 2026-11-02 10:00–12:00. Тоді no request is created, and the employee sees the message "You already have a request for this time: 2026-11-02 09:00–11:00".
+- AC-LEAVE-14: Дано employee teacher1@example.test has 2 records and employee teacher2@example.test has 3 records. Коли teacher1@example.test opens "My requests". Тоді the list contains exactly 2 records — only their own — each with date, hours, position, leave type and status.
+- AC-LEAVE-15: Дано a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. Коли the employee requests "Personal leave" on 2026-11-03 from 11:00 to 13:00. Тоді 1 record 2026-11-03 11:00–13:00 is created with a duration of 1 h 30 min (the gap 12:00–12:30 is not counted).
+- AC-LEAVE-16: Дано the employee already has a main-position record 2026-11-03 09:00–11:00 with status "Awaiting decision". Коли the employee confirms a whole-day request for 2026-11-02 and 2026-11-03. Тоді no record is created for either date, and the employee sees the message "You already have a request for this time: 2026-11-03 09:00–11:00".
 
 ### Поза межами
 
@@ -79,15 +79,19 @@ and each position gets its own record that goes to that position's manager.
   revision" or "Approved"; records with status "Rejected" or "Cancelled" do not block.
 - An employee may request a date in the past (for example, sick leave after the fact). There is no limit on how many
   days ahead or back a request can be made (confirmed by PM).
+- No amounts of money anywhere in this requirement: time is counted in minutes, displayed to the minute.
 
 ### Відкриті питання
 
-None.
+Немає
 
 ### Журнал змін
 
 - 2026-10-19 — created
-- 2026-10-19 — added AC-LEAVE-15: a request may span a gap between schedule blocks, only scheduled minutes count (spec-workflow review, G1/Q1)
-- 2026-10-19 — added AC-LEAVE-16 and the assumption "a request is saved as a whole": all records or none (spec-workflow review, G2)
-- 2026-10-19 — open question answered: no limit on how many days ahead or back a request can be made — moved to Assumptions
-- 2026-10-19 — open question answered: one leave type per request — moved to Assumptions
+- 2026-10-19 — added AC-LEAVE-15: a request may span a gap between schedule blocks, only scheduled minutes count — власне рішення PM
+- 2026-10-19 — added AC-LEAVE-16 and the assumption "a request is saved as a whole": all records or none — власне рішення PM
+- 2026-10-19 — open question answered: no limit on how many days ahead or back a request can be made — moved to Assumptions — власне рішення PM
+- 2026-10-19 — open question answered: one leave type per request — moved to Assumptions — власне рішення PM
+- 2026-10-19 — «Припущення»: додано, що сум грошей у вимозі немає — власне рішення PM
+- 2026-10-19 — усі AC: ключові слова Given/When/Then замінено на Дано/Коли/Тоді за форматом шаблону, зміст і ID без змін — власне рішення PM
+- 2026-10-19 — Перевірено за чеклістом: 1–20 так. Виправлено: додано AC-LEAVE-15 (запит через перерву в розкладі) і AC-LEAVE-16 (усі записи або жодного); у «Припущення» додано відсутність сум. Лишили свідомо: 16 AC — більше за орієнтир 6–10; AC-LEAVE-11 і AC-LEAVE-14 перевіряють один результат із кількома полями. AI-чат: ні.

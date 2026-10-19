@@ -32,25 +32,25 @@ separately, and the employee sees the result and the comment.
 
 ### Критерії приймання
 
-- AC-DECIDE-01: Given an employee with a main position (manager manager1@example.test) and an additional position (manager manager2@example.test) requested a whole day with both positions. When manager1@example.test opens the "Awaiting decision" list. Then it contains this employee's main-position record and does not contain the additional-position record.
-- AC-DECIDE-02: Given a request with 2 records with status "Awaiting decision". When the manager approves one of them. Then that record has status "Approved", and the other stays "Awaiting decision".
-- AC-DECIDE-03: Given a record with status "Awaiting decision". When the manager rejects it. Then the record has status "Rejected", and the employee sees this status in "My requests".
-- AC-DECIDE-04: Given a record with status "Awaiting decision". When the manager returns it for revision without a comment. Then the status does not change, and the manager sees the message "Tell the employee what to fix".
-- AC-DECIDE-05: Given a record with status "Awaiting decision". When the manager returns it for revision with the comment "Enter hours instead of a whole day". Then the record has status "Returned for revision", and the employee sees the comment "Enter hours instead of a whole day" on it.
-- AC-DECIDE-06: Given a record with status "Returned for revision". When the employee changes the hours from 08:30–15:30 to 09:00–12:00 and resubmits the record. Then the record has hours 09:00–12:00, status "Awaiting decision", and is again in the same manager's "Awaiting decision" list.
-- AC-DECIDE-07: Given a position has 2 responsible managers, and both see its record with status "Awaiting decision". When the first manager approves the record and the second then tries to reject it. Then the record stays "Approved", and the second manager sees the message "Another manager has already decided: Approved".
-- AC-DECIDE-08: Given manager2@example.test is not responsible for the employee's main position. When manager2@example.test tries to approve a record of that position. Then the status does not change, and the decision is not saved.
-- AC-DECIDE-09: Given an employee without the manager or administrator role. When this employee tries to approve their own record. Then the status does not change, and the decision is not saved.
-- AC-DECIDE-10: Given a record with status "Awaiting decision" of a position for which the administrator is not a responsible manager. When the administrator approves this record. Then the record has status "Approved", and the record's history shows that the administrator made the decision.
-- AC-DECIDE-11: Given the manager's "Awaiting decision" list has 3 records. When the manager approves 1 of them. Then 2 records remain in "Awaiting decision", and the approved record is in the manager's "History".
-- AC-DECIDE-12: Given a record with status "Approved". When the employee tries to change its hours. Then the change is not saved, and the employee sees the message "This record is already approved and cannot be changed".
-- AC-DECIDE-13: Given a record with status "Awaiting decision". When the employee cancels it. Then the record has status "Cancelled" and disappears from the manager's "Awaiting decision" list.
-- AC-DECIDE-14: Given the manager has 0 records with status "Awaiting decision". When the manager opens the "Awaiting decision" list. Then the manager sees the message "No records awaiting decision".
-- AC-DECIDE-15: Given a manager approved a record. When the employee or any responsible manager of the position views the record's history. Then the history has a line: date and time of the decision, who decided, decision "Approved".
-- AC-DECIDE-16: Given a record 2026-11-02 08:30–15:30 with status "Awaiting decision". When the employee changes its hours to 09:00–12:00. Then the record has hours 09:00–12:00, keeps status "Awaiting decision", and the manager sees 09:00–12:00 in the "Awaiting decision" list.
-- AC-DECIDE-17: Given a record with status "Returned for revision". When the employee cancels it. Then the record has status "Cancelled" and cannot be resubmitted.
-- AC-DECIDE-18: Given manager1@example.test is a responsible manager of their own main position and has an own record with status "Awaiting decision". When manager1@example.test tries to approve that record. Then the status does not change, and manager1@example.test sees the message "Your own record is decided by an administrator".
-- AC-DECIDE-19: Given the record from AC-DECIDE-18. When the administrator approves it. Then the record has status "Approved".
+- AC-DECIDE-01: Дано an employee with a main position (manager manager1@example.test) and an additional position (manager manager2@example.test) requested a whole day with both positions. Коли manager1@example.test opens the "Awaiting decision" list. Тоді it contains this employee's main-position record and does not contain the additional-position record.
+- AC-DECIDE-02: Дано a request with 2 records with status "Awaiting decision". Коли the manager approves one of them. Тоді that record has status "Approved", and the other stays "Awaiting decision".
+- AC-DECIDE-03: Дано a record with status "Awaiting decision". Коли the manager rejects it. Тоді the record has status "Rejected", and the employee sees this status in "My requests".
+- AC-DECIDE-04: Дано a record with status "Awaiting decision". Коли the manager returns it for revision without a comment. Тоді the status does not change, and the manager sees the message "Tell the employee what to fix".
+- AC-DECIDE-05: Дано a record with status "Awaiting decision". Коли the manager returns it for revision with the comment "Enter hours instead of a whole day". Тоді the record has status "Returned for revision", and the employee sees the comment "Enter hours instead of a whole day" on it.
+- AC-DECIDE-06: Дано a record with status "Returned for revision". Коли the employee changes the hours from 08:30–15:30 to 09:00–12:00 and resubmits the record. Тоді the record has hours 09:00–12:00, status "Awaiting decision", and is again in the same manager's "Awaiting decision" list.
+- AC-DECIDE-07: Дано a position has 2 responsible managers, and both see its record with status "Awaiting decision". Коли the first manager approves the record and the second then tries to reject it. Тоді the record stays "Approved", and the second manager sees the message "Another manager has already decided: Approved".
+- AC-DECIDE-08: Дано manager2@example.test is not responsible for the employee's main position. Коли manager2@example.test tries to approve a record of that position. Тоді the status does not change, and the decision is not saved.
+- AC-DECIDE-09: Дано an employee without the manager or administrator role. Коли this employee tries to approve their own record. Тоді the status does not change, and the decision is not saved.
+- AC-DECIDE-10: Дано a record with status "Awaiting decision" of a position for which the administrator is not a responsible manager. Коли the administrator approves this record. Тоді the record has status "Approved", and the record's history shows that the administrator made the decision.
+- AC-DECIDE-11: Дано the manager's "Awaiting decision" list has 3 records. Коли the manager approves 1 of them. Тоді 2 records remain in "Awaiting decision", and the approved record is in the manager's "History".
+- AC-DECIDE-12: Дано a record with status "Approved". Коли the employee tries to change its hours. Тоді the change is not saved, and the employee sees the message "This record is already approved and cannot be changed".
+- AC-DECIDE-13: Дано a record with status "Awaiting decision". Коли the employee cancels it. Тоді the record has status "Cancelled" and disappears from the manager's "Awaiting decision" list.
+- AC-DECIDE-14: Дано the manager has 0 records with status "Awaiting decision". Коли the manager opens the "Awaiting decision" list. Тоді the manager sees the message "No records awaiting decision".
+- AC-DECIDE-15: Дано a manager approved a record. Коли the employee or any responsible manager of the position views the record's history. Тоді the history has a line: date and time of the decision, who decided, decision "Approved".
+- AC-DECIDE-16: Дано a record 2026-11-02 08:30–15:30 with status "Awaiting decision". Коли the employee changes its hours to 09:00–12:00. Тоді the record has hours 09:00–12:00, keeps status "Awaiting decision", and the manager sees 09:00–12:00 in the "Awaiting decision" list.
+- AC-DECIDE-17: Дано a record with status "Returned for revision". Коли the employee cancels it. Тоді the record has status "Cancelled" and cannot be resubmitted.
+- AC-DECIDE-18: Дано manager1@example.test is a responsible manager of their own main position and has an own record with status "Awaiting decision". Коли manager1@example.test tries to approve that record. Тоді the status does not change, and manager1@example.test sees the message "Your own record is decided by an administrator".
+- AC-DECIDE-19: Дано the record from AC-DECIDE-18. Коли the administrator approves it. Тоді the record has status "Approved".
 
 ### Поза межами
 
@@ -76,17 +76,21 @@ separately, and the employee sees the result and the comment.
   flagging such positions is slice WS10).
 - An employee can cancel only their own record with status "Awaiting decision" or "Returned for revision".
 - A resubmitted record goes to the same responsible managers of the position as the first time.
+- No amounts of money anywhere in this requirement: time is counted in minutes, displayed to the minute.
 
 ### Відкриті питання
 
-None.
+Немає
 
 ### Журнал змін
 
 - 2026-10-19 — created
-- 2026-10-19 — added AC-DECIDE-16: employee edits a record awaiting decision (spec-workflow review, G3)
-- 2026-10-19 — added AC-DECIDE-17: employee cancels a returned record (spec-workflow review, G4)
-- 2026-10-19 — AC-DECIDE-15: "anyone with access" replaced with "the employee or any responsible manager of the position" (spec-workflow review, G7)
-- 2026-10-19 — open question answered: the 5 statuses are final — moved to Assumptions
-- 2026-10-19 — open question answered: a manager's own record is decided only by an administrator — added AC-DECIDE-18, AC-DECIDE-19
-- 2026-10-19 — open question answered: records of a position with no manager are handled by the administrator — moved to Assumptions
+- 2026-10-19 — added AC-DECIDE-16: employee edits a record awaiting decision — власне рішення PM
+- 2026-10-19 — added AC-DECIDE-17: employee cancels a returned record — власне рішення PM
+- 2026-10-19 — AC-DECIDE-15: "anyone with access" replaced with "the employee or any responsible manager of the position" — власне рішення PM
+- 2026-10-19 — open question answered: the 5 statuses are final — moved to Assumptions — власне рішення PM
+- 2026-10-19 — open question answered: a manager's own record is decided only by an administrator — added AC-DECIDE-18, AC-DECIDE-19 — власне рішення PM
+- 2026-10-19 — open question answered: records of a position with no manager are handled by the administrator — moved to Assumptions — власне рішення PM
+- 2026-10-19 — «Припущення»: додано, що сум грошей у вимозі немає — власне рішення PM
+- 2026-10-19 — усі AC: ключові слова Given/When/Then замінено на Дано/Коли/Тоді за форматом шаблону, зміст і ID без змін — власне рішення PM
+- 2026-10-19 — Перевірено за чеклістом: 1–20 так. Виправлено: додано AC-DECIDE-16, -17 (зміна й скасування працівником), AC-DECIDE-18, -19 (власний запис менеджера вирішує адміністратор); AC-DECIDE-15 уточнено, хто бачить історію; у «Припущення» додано відсутність сум. Лишили свідомо: 19 AC — більше за орієнтир 6–10. AI-чат: ні.
