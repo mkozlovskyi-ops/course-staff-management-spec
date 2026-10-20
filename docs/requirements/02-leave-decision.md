@@ -24,7 +24,8 @@ separately, and the employee sees the result and the comment.
 
 1. The manager opens the "Awaiting decision" list — records of the positions they are responsible for.
 2. The manager reviews a record: employee, position, date, hours, leave type, employee's comment.
-3. The manager makes one of the decisions: approve, reject, or return for revision with a comment.
+3. The manager makes one of the decisions: approve, reject, or return for revision; the comment is required for
+   returning and optional for approving or rejecting.
 4. The record leaves the "Awaiting decision" list and appears in the manager's "History".
 5. The employee sees the new record status and the manager's comment in "My requests".
 6. If the record was returned, the employee corrects it and resubmits — the record is again in the "Awaiting
@@ -54,6 +55,8 @@ separately, and the employee sees the result and the comment.
 - AC-DECIDE-20: Given a record of a request with the comment "Doctor's appointment" and status "Awaiting decision". When the manager opens the record. Then the manager sees the comment "Doctor's appointment".
 - AC-DECIDE-21: Given a record 2026-11-02 "Sick leave" with status "Awaiting decision". When the employee tries to change its leave type to "Personal leave". Then the change is not saved, and the employee sees the message "Only the hours can be changed. To change the date, position or leave type, cancel this record and submit a new request".
 - AC-DECIDE-22: Given two records of the same position on 2026-11-02, 08:30–10:00 and 13:00–15:30, both with status "Awaiting decision". When the employee changes the second record to 09:00–15:30. Then the change is not saved, and the employee sees the message "You already have a request for this time: 2026-11-02 08:30–10:00".
+- AC-DECIDE-23: Given a record with status "Awaiting decision". When the manager rejects it with the comment "Not enough staff that day". Then the record has status "Rejected", and the employee sees the comment "Not enough staff that day" in "My requests".
+- AC-DECIDE-24: Given a record with status "Awaiting decision". When the manager approves it with the comment "Get well soon". Then the record has status "Approved", and the employee sees the comment "Get well soon" in "My requests".
 
 ### Out of scope
 
@@ -78,6 +81,8 @@ separately, and the employee sees the result and the comment.
 - Records of a position that has no responsible manager left are handled by the administrator (confirmed by PM;
   flagging such positions is slice WS10).
 - An employee can cancel only their own record with status "Awaiting decision" or "Returned for revision".
+- The manager's comment is required when returning a record for revision and optional when approving or
+  rejecting; the employee sees it in "My requests". Rejecting without a comment works as in AC-DECIDE-03.
 - A resubmitted record goes to the same responsible managers of the position as the first time.
 - Before a decision the employee can change only the hours of a record, within the schedule of the same position on
   the same date; changing the date, position or leave type means cancelling the record and submitting a new request.
@@ -104,3 +109,4 @@ None.
 - 2026-10-19 — document fully in English, section headings and change-log entries included — PM's own decision
 - 2026-10-20 — added AC-DECIDE-20: the manager sees the employee's optional comment (Main scenario step 2 now matches requirement 01) — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/1
 - 2026-10-20 — added AC-DECIDE-21, AC-DECIDE-22 and assumptions: the employee changes only hours; the edited record is not checked against itself — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/2
+- 2026-10-21 — added AC-DECIDE-23, AC-DECIDE-24 and the assumption: an optional manager comment on approve and reject; Main scenario step 3 updated — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/10

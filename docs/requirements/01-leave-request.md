@@ -55,6 +55,7 @@ and each position gets its own record that goes to that position's manager.
 - AC-LEAVE-18: Given the employee enters a comment of 501 characters. When the employee tries to submit the request. Then no request is created, and the employee sees the message "The comment can be at most 500 characters".
 - AC-LEAVE-19: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee enters the hours 07:30–09:00 on 2026-11-03. Then no request is created, and the employee sees the message "Hours must be within your schedule: 08:30–12:00, 12:30–15:30".
 - AC-LEAVE-20: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee enters 12:00 as the start on 2026-11-03. Then no request is created, and the employee sees the message "12:00 is the end of working time and can only be chosen as the end of leave".
+- AC-LEAVE-21: Given an employee with the schedule Mon–Fri 08:30–15:30. When the employee chooses Friday 2026-11-06 and Saturday 2026-11-07 in one whole-day request and confirms. Then Saturday is not accepted with the message "You have no working hours on this day", and 1 record is created, for 2026-11-06.
 
 ### Out of scope
 
@@ -77,7 +78,8 @@ and each position gets its own record that goes to that position's manager.
 - "Whole day" for a position means all blocks of its schedule on that date.
 - A request may span a gap between schedule blocks; only the minutes inside the blocks count. The start and the end
   must each fall inside a block (the end may equal a block's end).
-- A request is saved as a whole: either all of its records are created or none.
+- A request is saved as a whole: either all of its records are created or none. A date without working hours is
+  not accepted (AC-LEAVE-06) and the other dates of the request stay; "all or none" applies to the accepted dates.
 - One leave type per request; different types mean different requests (confirmed by PM).
 - A request may have one optional comment of up to 500 characters; it is stored on every record of the request.
 - When hours are outside the schedule, the message lists all blocks of that day, separated by ", " in time order.
@@ -106,3 +108,4 @@ None.
 - 2026-10-20 — added AC-LEAVE-17, AC-LEAVE-18 and the assumption on an optional comment up to 500 characters; Main scenario steps 4–5 mention the comment — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/1
 - 2026-10-20 — assumption on overlaps: a record being edited is not checked against itself — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/2
 - 2026-10-20 — added AC-LEAVE-19, AC-LEAVE-20 and the assumption that the schedule message lists all blocks of the day — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/5
+- 2026-10-21 — added AC-LEAVE-21 and the assumption: a date without working hours is dropped from a multi-date request with the message, the other dates stay — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/9

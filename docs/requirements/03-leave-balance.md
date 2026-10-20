@@ -51,6 +51,8 @@ from approved records, consistently for whole days and hours, and warns when a r
 - AC-BALANCE-18: Given the record from AC-BALANCE-10 approved with the split. When the employee opens "My requests". Then there is one record with type "Personal leave", status "Approved" and the split "0.50 Personal leave + 0.50 Unpaid leave".
 - AC-BALANCE-19: Given a whole-day "Personal leave" record with status "Awaiting decision" of an employee whose "Personal leave" shows remaining 0.00 and "Unpaid leave" used 0.00. When the manager approves it with the suggested split. Then the record keeps type "Personal leave" with the split "0.00 Personal leave + 1.00 Unpaid leave", and "Unpaid leave" shows used 1.00.
 - AC-BALANCE-20: Given teacher1@example.test has used 2.00 days of "Personal leave" on the main position (manager1@example.test) and has an additional position managed by manager2@example.test. When manager2@example.test views the balances of teacher1@example.test. Then "Personal leave" shows used 2.00, remaining 16.00 — the same as teacher1@example.test sees.
+- AC-BALANCE-21: Given an employee with 5.00 days of "Sick leave" left in school year 2026–2027 and a whole-day "Sick leave" record for 2027-08-30 with status "Awaiting decision". When the manager approves it on 2027-09-02. Then "Sick leave" 2026–2027 shows remaining 4.00, and 2027–2028 shows carried over 4.00, remaining 22.00.
+- AC-BALANCE-22: Given an employee with a position scheduled on 2027-08-31 and 2027-09-01. When the manager approves both whole-day "Personal leave" records of a request for these two dates. Then "Personal leave" shows used 1.00 more in school year 2026–2027 and used 1.00 more in school year 2027–2028.
 
 ### Out of scope
 
@@ -77,6 +79,9 @@ from approved records, consistently for whole days and hours, and warns when a r
 - The share of a day is calculated for each date separately and rounded half up to 2 decimal places (0.355 → 0.36);
   the balance is the sum of the rounded shares.
 - Only records with status "Approved" reduce the balance.
+- A record reduces the balance of the school year its date belongs to, whenever it is approved. A late approval for
+  a past school year also lowers the next year's carried-over days. A request over two school years gives records
+  in each year.
 - A record approved with a split stays one record with its leave type; the split is shown on it and counted in
   the balances of both types.
 - A responsible manager of any of the employee's positions sees the employee's full balance, the same numbers the
@@ -109,3 +114,4 @@ None.
 - 2026-10-20 — added AC-BALANCE-18, AC-BALANCE-19 and the assumption: a split record stays one record with the split shown — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/4
 - 2026-10-20 — added AC-BALANCE-20, the assumption and the role description: a manager of any of the employee's positions sees the full balance — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/6
 - 2026-10-20 — assumption added: the schedules of one employee's positions never overlap; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/8
+- 2026-10-21 — added AC-BALANCE-21, AC-BALANCE-22 and the assumption: a record counts in the school year of its date, also when approved later — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/11
