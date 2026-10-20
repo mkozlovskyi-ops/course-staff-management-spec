@@ -71,6 +71,9 @@ from approved records, consistently for whole days and hours, and warns when a r
   of all their positions (confirmed by PM). Records that together cover all those minutes count as 1.00 day; a
   whole day of only one of several positions counts as its share (AC-BALANCE-06). One date never counts as more
   than 1.00 day.
+- The schedules of one employee's positions never overlap in time, so every working minute of a date belongs to
+  exactly one position. Schedules are kept non-overlapping by the administrator (slice WS10); test data is created
+  without overlaps.
 - The share of a day is calculated for each date separately and rounded half up to 2 decimal places (0.355 → 0.36);
   the balance is the sum of the rounded shares.
 - Only records with status "Approved" reduce the balance.
@@ -105,3 +108,4 @@ None.
 - 2026-10-20 — added AC-BALANCE-17 and the assumption: one over-balance warning for the total of the request — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/3
 - 2026-10-20 — added AC-BALANCE-18, AC-BALANCE-19 and the assumption: a split record stays one record with the split shown — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/4
 - 2026-10-20 — added AC-BALANCE-20, the assumption and the role description: a manager of any of the employee's positions sees the full balance — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/6
+- 2026-10-20 — assumption added: the schedules of one employee's positions never overlap; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/8
