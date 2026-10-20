@@ -28,8 +28,8 @@ and each position gets its own record that goes to that position's manager.
 3. For each position on each date the employee decides whether to include it; if included — whole day or specific
    hours within the schedule.
 4. The employee chooses the leave type (for "Family celebration" — also the relationship of the person the celebration
-   is for).
-5. The employee reviews a summary — dates, hours, positions and leave type — and confirms.
+   is for) and may add an optional comment.
+5. The employee reviews a summary — dates, hours, positions, leave type and comment — and confirms.
 6. The portal creates one leave record per included position per date, each with status "Awaiting decision".
 7. The employee sees their records in the "My requests" list with the status of each.
 
@@ -51,6 +51,10 @@ and each position gets its own record that goes to that position's manager.
 - AC-LEAVE-14: Given employee teacher1@example.test has 2 records and employee teacher2@example.test has 3 records. When teacher1@example.test opens "My requests". Then the list contains exactly 2 records — only their own — each with date, hours, position, leave type and status.
 - AC-LEAVE-15: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee requests "Personal leave" on 2026-11-03 from 11:00 to 13:00. Then 1 record 2026-11-03 11:00–13:00 is created with a duration of 1 h 30 min (the gap 12:00–12:30 is not counted).
 - AC-LEAVE-16: Given the employee already has a main-position record 2026-11-03 09:00–11:00 with status "Awaiting decision". When the employee confirms a whole-day request for 2026-11-02 and 2026-11-03. Then no record is created for either date, and the employee sees the message "You already have a request for this time: 2026-11-03 09:00–11:00".
+- AC-LEAVE-17: Given the employee requests the whole day 2026-11-02 for both positions from AC-LEAVE-02 with the comment "Doctor's appointment". When the employee confirms the summary. Then both created records carry the comment "Doctor's appointment".
+- AC-LEAVE-18: Given the employee enters a comment of 501 characters. When the employee tries to submit the request. Then no request is created, and the employee sees the message "The comment can be at most 500 characters".
+- AC-LEAVE-19: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee enters the hours 07:30–09:00 on 2026-11-03. Then no request is created, and the employee sees the message "Hours must be within your schedule: 08:30–12:00, 12:30–15:30".
+- AC-LEAVE-20: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee enters 12:00 as the start on 2026-11-03. Then no request is created, and the employee sees the message "12:00 is the end of working time and can only be chosen as the end of leave".
 
 ### Out of scope
 
@@ -75,8 +79,11 @@ and each position gets its own record that goes to that position's manager.
   must each fall inside a block (the end may equal a block's end).
 - A request is saved as a whole: either all of its records are created or none.
 - One leave type per request; different types mean different requests (confirmed by PM).
+- A request may have one optional comment of up to 500 characters; it is stored on every record of the request.
+- When hours are outside the schedule, the message lists all blocks of that day, separated by ", " in time order.
 - Records of the same position may not overlap in time when they have status "Awaiting decision", "Returned for
-  revision" or "Approved"; records with status "Rejected" or "Cancelled" do not block.
+  revision" or "Approved"; records with status "Rejected" or "Cancelled" do not block. A record that is being
+  edited is not checked against itself.
 - An employee may request a date in the past (for example, sick leave after the fact). There is no limit on how many
   days ahead or back a request can be made (confirmed by PM).
 - No amounts of money anywhere in this requirement: time is counted in minutes, displayed to the minute.
@@ -96,3 +103,6 @@ None.
 - 2026-10-19 — all ACs: keywords temporarily switched to the template's Ukrainian form, then back to Given/When/Then; meaning and IDs unchanged — PM's own decision
 - 2026-10-19 — Checked against the checklist: items 1–20 yes. Fixed: added AC-LEAVE-15 (a request spanning a gap in the schedule) and AC-LEAVE-16 (all records or none); added "no money amounts" to Assumptions. Kept on purpose: 16 ACs, more than the 6–10 guideline; AC-LEAVE-11 and AC-LEAVE-14 check one result with several fields. AI chat: no.
 - 2026-10-19 — document fully in English, section headings and change-log entries included — PM's own decision
+- 2026-10-20 — added AC-LEAVE-17, AC-LEAVE-18 and the assumption on an optional comment up to 500 characters; Main scenario steps 4–5 mention the comment — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/1
+- 2026-10-20 — assumption on overlaps: a record being edited is not checked against itself — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/2
+- 2026-10-20 — added AC-LEAVE-19, AC-LEAVE-20 and the assumption that the schedule message lists all blocks of the day — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/5

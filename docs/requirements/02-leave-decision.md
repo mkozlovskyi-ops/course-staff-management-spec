@@ -51,6 +51,9 @@ separately, and the employee sees the result and the comment.
 - AC-DECIDE-17: Given a record with status "Returned for revision". When the employee cancels it. Then the record has status "Cancelled" and cannot be resubmitted.
 - AC-DECIDE-18: Given manager1@example.test is a responsible manager of their own main position and has an own record with status "Awaiting decision". When manager1@example.test tries to approve that record. Then the status does not change, and manager1@example.test sees the message "Your own record is decided by an administrator".
 - AC-DECIDE-19: Given the record from AC-DECIDE-18. When the administrator approves it. Then the record has status "Approved".
+- AC-DECIDE-20: Given a record of a request with the comment "Doctor's appointment" and status "Awaiting decision". When the manager opens the record. Then the manager sees the comment "Doctor's appointment".
+- AC-DECIDE-21: Given a record 2026-11-02 "Sick leave" with status "Awaiting decision". When the employee tries to change its leave type to "Personal leave". Then the change is not saved, and the employee sees the message "Only the hours can be changed. To change the date, position or leave type, cancel this record and submit a new request".
+- AC-DECIDE-22: Given two records of the same position on 2026-11-02, 08:30–10:00 and 13:00–15:30, both with status "Awaiting decision". When the employee changes the second record to 09:00–15:30. Then the change is not saved, and the employee sees the message "You already have a request for this time: 2026-11-02 08:30–10:00".
 
 ### Out of scope
 
@@ -76,6 +79,10 @@ separately, and the employee sees the result and the comment.
   flagging such positions is slice WS10).
 - An employee can cancel only their own record with status "Awaiting decision" or "Returned for revision".
 - A resubmitted record goes to the same responsible managers of the position as the first time.
+- Before a decision the employee can change only the hours of a record, within the schedule of the same position on
+  the same date; changing the date, position or leave type means cancelling the record and submitting a new request.
+- When the employee changes hours, the record is not checked for overlap against itself, only against the other
+  records of the position.
 - No amounts of money anywhere in this requirement: time is counted in minutes, displayed to the minute.
 
 ### Open questions
@@ -95,3 +102,5 @@ None.
 - 2026-10-19 — all ACs: keywords temporarily switched to the template's Ukrainian form, then back to Given/When/Then; meaning and IDs unchanged — PM's own decision
 - 2026-10-19 — Checked against the checklist: items 1–20 yes. Fixed: added AC-DECIDE-16, -17 (employee edits and cancels), AC-DECIDE-18, -19 (a manager's own record is decided by an administrator); clarified in AC-DECIDE-15 who sees the history; added "no money amounts" to Assumptions. Kept on purpose: 19 ACs, more than the 6–10 guideline. AI chat: no.
 - 2026-10-19 — document fully in English, section headings and change-log entries included — PM's own decision
+- 2026-10-20 — added AC-DECIDE-20: the manager sees the employee's optional comment (Main scenario step 2 now matches requirement 01) — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/1
+- 2026-10-20 — added AC-DECIDE-21, AC-DECIDE-22 and assumptions: the employee changes only hours; the edited record is not checked against itself — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/2

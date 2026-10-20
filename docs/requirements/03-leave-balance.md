@@ -15,7 +15,7 @@ from approved records, consistently for whole days and hours, and warns when a r
 ### Users and roles
 
 - Employee (`employee`) — sees only their own balances; sees a warning when a request exceeds the balance.
-- Responsible manager (`manager`) — sees the balances of employees of their own positions; sees a warning on the
+- Responsible manager (`manager`) — sees the full balances of employees who have at least one of their positions; sees a warning on the
   record and decides whether to approve it with a split into paid and unpaid parts.
 - Administrator (`admin`) — sees the balances of all employees.
 
@@ -47,6 +47,10 @@ from approved records, consistently for whole days and hours, and warns when a r
 - AC-BALANCE-14: Given an employee whose "Personal leave" shows remaining 1.50, a position with the schedule Mon–Fri 08:30–15:30, and two whole-day "Personal leave" records on 2026-11-03 and 2026-11-04 with status "Awaiting decision". When the manager approves the 2026-11-03 record and then opens the 2026-11-04 record. Then the manager sees the warning "This request exceeds the Personal leave balance (0.50 day). Suggested: 0.50 day Personal leave, 0.50 day Unpaid leave".
 - AC-BALANCE-15: Given an employee whose "Personal leave" shows remaining 0.20 and a single position with the schedule Tue 08:30–15:30 (420 min). When the employee requests "Personal leave" on 2026-11-03 from 09:00 to 11:30 (0.36 day). Then the request is created, and the employee sees the warning "Your Personal leave balance is 0.20 day. Another 0.16 day will be counted as Unpaid leave".
 - AC-BALANCE-16: Given the record from AC-BALANCE-09. When the manager tries to approve it entirely as "Personal leave" without the split. Then the record is not approved, and the manager sees the message "The Personal leave balance is 0.50 day: approve with the suggested split or reject".
+- AC-BALANCE-17: Given an employee whose "Personal leave" shows remaining 1.50 and a position with the schedule Mon–Fri 08:30–15:30. When the employee requests "Personal leave" for the whole days 2026-11-02, 2026-11-03 and 2026-11-04 in one request. Then the request is created, and the employee sees one warning "Your Personal leave balance is 1.50 day. Another 1.50 day will be counted as Unpaid leave".
+- AC-BALANCE-18: Given the record from AC-BALANCE-10 approved with the split. When the employee opens "My requests". Then there is one record with type "Personal leave", status "Approved" and the split "0.50 Personal leave + 0.50 Unpaid leave".
+- AC-BALANCE-19: Given a whole-day "Personal leave" record with status "Awaiting decision" of an employee whose "Personal leave" shows remaining 0.00 and "Unpaid leave" used 0.00. When the manager approves it with the suggested split. Then the record keeps type "Personal leave" with the split "0.00 Personal leave + 1.00 Unpaid leave", and "Unpaid leave" shows used 1.00.
+- AC-BALANCE-20: Given teacher1@example.test has used 2.00 days of "Personal leave" on the main position (manager1@example.test) and has an additional position managed by manager2@example.test. When manager2@example.test views the balances of teacher1@example.test. Then "Personal leave" shows used 2.00, remaining 16.00 — the same as teacher1@example.test sees.
 
 ### Out of scope
 
@@ -63,12 +67,19 @@ from approved records, consistently for whole days and hours, and warns when a r
 - "Sick leave" and "Personal leave" — 18.00 days per school year each, separately (confirmed by PM); the limit belongs to the employee,
   not to a position: all of an employee's positions draw from one balance.
 - Unused days carry over to the next school year in full, with no cap.
-- Whole day = 1.00 day. Part of a day = the record's minutes ÷ all of the employee's working minutes on that date
-  across the schedules of all their positions (confirmed by PM). One date never counts as more than 1.00 day.
+- Share of a day = the record's minutes ÷ all of the employee's working minutes on that date across the schedules
+  of all their positions (confirmed by PM). Records that together cover all those minutes count as 1.00 day; a
+  whole day of only one of several positions counts as its share (AC-BALANCE-06). One date never counts as more
+  than 1.00 day.
 - The share of a day is calculated for each date separately and rounded half up to 2 decimal places (0.355 → 0.36);
   the balance is the sum of the rounded shares.
 - Only records with status "Approved" reduce the balance.
-- The warning to the employee uses the balance at the moment of submission; the warning and suggested split for
+- A record approved with a split stays one record with its leave type; the split is shown on it and counted in
+  the balances of both types.
+- A responsible manager of any of the employee's positions sees the employee's full balance, the same numbers the
+  employee sees.
+- The warning to the employee is one warning for the total of the whole request and uses the balance at the moment
+  of submission; the warning and suggested split for
   the manager use the balance at the moment the manager opens and decides the record, after any approvals made
   in between.
 - Carried-over days at the start of the first school year for testing are entered by the developer as test data.
@@ -90,3 +101,7 @@ None.
 - 2026-10-19 — all ACs: keywords temporarily switched to the template's Ukrainian form, then back to Given/When/Then; meaning and IDs unchanged — PM's own decision
 - 2026-10-19 — Checked against the checklist: items 1–20 yes. Fixed: added AC-BALANCE-14, -15, -16 (balance at decision time, partial day, split only); gave AC-BALANCE-10 concrete numbers. Kept on purpose: 16 ACs, more than the 6–10 guideline; AC-BALANCE-01 checks one balance view with several numbers. AI chat: no.
 - 2026-10-19 — document fully in English, section headings and change-log entries included — PM's own decision
+- 2026-10-20 — assumption on day share reworded: the formula is the rule, a whole day of all positions equals 1.00; ACs unchanged — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/7
+- 2026-10-20 — added AC-BALANCE-17 and the assumption: one over-balance warning for the total of the request — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/3
+- 2026-10-20 — added AC-BALANCE-18, AC-BALANCE-19 and the assumption: a split record stays one record with the split shown — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/4
+- 2026-10-20 — added AC-BALANCE-20, the assumption and the role description: a manager of any of the employee's positions sees the full balance — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/6
