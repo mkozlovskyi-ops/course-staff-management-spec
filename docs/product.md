@@ -50,6 +50,8 @@ manager or an administrator is also an employee and submits their own requests.
 | See the school calendar | yes | yes | yes |
 | Change the school calendar (days off, holidays, early dismissals) | — | — | yes |
 | Create employees, positions, schedules; assign managers and deputies | — | — | yes |
+| Change own password | own only | own only | own only |
+| Change a user's name or email (including own) | — | — | yes |
 | Maintain an employee's substitute list | — | only employees of own positions | yes |
 | See the register of approved leave | — | only employees of own positions | yes |
 | See salaries or pay rates | — | — | — |
@@ -82,7 +84,7 @@ manager or an administrator is also an employee and submits their own requests.
 | WS7 | The administrator closes days and hours in the school calendar (holidays, early dismissals), and they cannot be taken as leave | — | planned |
 | WS8 | An employee chooses a substitute for each record, and an assistant can temporarily replace a teacher with an upgrade | — | planned |
 | WS9 | The administrator views and downloads the register of approved leave separately for each division | — | planned |
-| WS10 | The administrator manages employees, positions, schedules, managers and deputy managers | — | planned |
+| WS10 | The administrator manages employees (including their names and emails), positions, schedules, managers and deputy managers, and every user changes their own password | — | planned |
 | WS11 | A manager submits a request on behalf of an employee and edits a record's date, hours, leave type or substitute before deciding, and an employee gets a reminder about long Personal leave and cancels an approved record through the manager | — | planned |
 
 ### Out of scope
