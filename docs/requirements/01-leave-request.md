@@ -82,6 +82,13 @@ and each position gets its own record that goes to that position's manager.
   not accepted (AC-LEAVE-06) and the other dates of the request stay; "all or none" applies to the accepted dates.
 - One leave type per request; different types mean different requests (confirmed by PM).
 - A request may have one optional comment of up to 500 characters; it is stored on every record of the request.
+- How the employee picks several dates (calendar, list of date fields or a range) is the developer's choice; the
+  requirement is only that several dates can be chosen in one request and a date without working hours is not
+  accepted (AC-LEAVE-06, AC-LEAVE-21).
+- The leave type and the record status are always shown as text. Colour or icons may be added by the developer,
+  but only in addition to the text, never instead of it.
+- "My requests" is a list (AC-LEAVE-14). A calendar view of the same records may be added by the developer; it is
+  not required in this slice.
 - When hours are outside the schedule, the message lists all blocks of that day, separated by ", " in time order.
 - Records of the same position may not overlap in time when they have status "Awaiting decision", "Returned for
   revision" or "Approved"; records with status "Rejected" or "Cancelled" do not block. A record that is being
@@ -109,3 +116,6 @@ None.
 - 2026-10-20 — assumption on overlaps: a record being edited is not checked against itself — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/2
 - 2026-10-20 — added AC-LEAVE-19, AC-LEAVE-20 and the assumption that the schedule message lists all blocks of the day — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/5
 - 2026-10-21 — added AC-LEAVE-21 and the assumption: a date without working hours is dropped from a multi-date request with the message, the other dates stay — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/9
+- 2026-10-23 — assumption added: how several dates are picked is the developer's choice; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/13
+- 2026-10-23 — assumption added: leave type and status are always shown as text, colour only in addition; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/14
+- 2026-10-23 — assumption added: "My requests" is a list, a calendar view is optional; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/15
