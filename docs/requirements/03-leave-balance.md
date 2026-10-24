@@ -78,6 +78,9 @@ from approved records, consistently for whole days and hours, and warns when a r
   without overlaps.
 - The share of a day is calculated for each date separately and rounded half up to 2 decimal places (0.355 → 0.36);
   the balance is the sum of the rounded shares.
+- The over-balance warning (AC-BALANCE-08, -15, -17) does not stop the request, so it must be distinguishable from an
+  error that does (for example AC-LEAVE-18): the employee can tell "not saved" from "saved, but note this". How
+  this looks is the developer's choice; the message text is always exactly as in the AC.
 - Only records with status "Approved" reduce the balance.
 - A record reduces the balance of the school year its date belongs to, whenever it is approved. A late approval for
   a past school year also lowers the next year's carried-over days. A request over two school years gives records
@@ -115,3 +118,4 @@ None.
 - 2026-10-20 — added AC-BALANCE-20, the assumption and the role description: a manager of any of the employee's positions sees the full balance — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/6
 - 2026-10-20 — assumption added: the schedules of one employee's positions never overlap; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/8
 - 2026-10-21 — added AC-BALANCE-21, AC-BALANCE-22 and the assumption: a record counts in the school year of its date, also when approved later — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/11
+- 2026-10-24 — assumption added: the over-balance warning is distinguishable from an error; its look is the developer's choice; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/16

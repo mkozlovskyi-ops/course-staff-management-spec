@@ -83,6 +83,8 @@ separately, and the employee sees the result and the comment.
 - An employee can cancel only their own record with status "Awaiting decision" or "Returned for revision".
 - The manager's comment is required when returning a record for revision and optional when approving or
   rejecting; the employee sees it in "My requests". Rejecting without a comment works as in AC-DECIDE-03.
+- Whether the manager is asked to confirm before approving or rejecting is the developer's choice. Note that
+  "Approved" and "Rejected" cannot be changed back in this slice, so a decision made by mistake cannot be undone.
 - A resubmitted record goes to the same responsible managers of the position as the first time.
 - Before a decision the employee can change only the hours of a record, within the schedule of the same position on
   the same date; changing the date, position or leave type means cancelling the record and submitting a new request.
@@ -110,3 +112,4 @@ None.
 - 2026-10-20 — added AC-DECIDE-20: the manager sees the employee's optional comment (Main scenario step 2 now matches requirement 01) — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/1
 - 2026-10-20 — added AC-DECIDE-21, AC-DECIDE-22 and assumptions: the employee changes only hours; the edited record is not checked against itself — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/2
 - 2026-10-21 — added AC-DECIDE-23, AC-DECIDE-24 and the assumption: an optional manager comment on approve and reject; Main scenario step 3 updated — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/10
+- 2026-10-24 — assumption added: a confirmation before approve or reject is the developer's choice; "Approved" and "Rejected" cannot be undone in this slice; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/17
