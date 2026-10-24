@@ -38,23 +38,29 @@ manager or an administrator is also an employee and submits their own requests.
 
 ### Permission matrix
 
-| Action | employee | manager | admin |
-|---|---|---|---|
-| See own schedule, requests and balances | yes | yes | yes |
-| Submit own leave request | yes | yes | yes |
-| Change own record with status "Awaiting decision" or "Returned for revision" | own only | own only | own only |
-| Submit a request on behalf of another employee | — | only employees of own positions | yes |
-| See other employees' leave records | — | only records of own positions | yes |
-| Approve, reject, return for revision or cancel a record | — | only records of own positions, never own records | yes |
-| See other employees' balances | — | only employees of own positions | yes |
-| See the school calendar | yes | yes | yes |
-| Change the school calendar (days off, holidays, early dismissals) | — | — | yes |
-| Create employees, positions, schedules; assign managers and deputies | — | — | yes |
-| Change own password | own only | own only | own only |
-| Change a user's name or email (including own) | — | — | yes |
-| Maintain an employee's substitute list | — | only employees of own positions | yes |
-| See the register of approved leave | — | only employees of own positions | yes |
-| See salaries or pay rates | — | — | — |
+The "From slice" column says from which slice an action is available; before that slice no implementation offers it.
+
+| Action | employee | manager | admin | From slice |
+|---|---|---|---|---|
+| See own schedule, requests and balances | yes | yes | yes | WS6 |
+| Submit own leave request | yes | yes | yes | WS6 |
+| Change the hours of own record with status "Awaiting decision" or "Returned for revision" | own only | own only | own only | WS6 |
+| Cancel own record with status "Awaiting decision" or "Returned for revision" | own only | own only | own only | WS6 |
+| Cancel own approved record (through the manager) | own only | own only | own only | WS11 |
+| Submit a request on behalf of another employee | — | only employees of own positions | yes | WS11 |
+| See other employees' leave records | — | only records of own positions | yes | WS6 |
+| Approve, reject or return a record for revision | — | only records of own positions, never own records | yes | WS6 |
+| Change another employee's record before deciding (date, hours, leave type, substitute) | — | only records of own positions | yes | WS11 |
+| Cancel another employee's record | — | only records of own positions | yes | WS11 |
+| See other employees' balances | — | only employees of own positions | yes | WS6 |
+| See the school calendar | yes | yes | yes | WS7 |
+| Change the school calendar (days off, holidays, early dismissals) | — | — | yes | WS7 |
+| Create employees, positions, schedules; assign managers and deputies | — | — | yes | WS10 |
+| Change own password | own only | own only | own only | WS10 |
+| Change a user's name or email (including own) | — | — | yes | WS10 |
+| Maintain an employee's substitute list | — | only employees of own positions | yes | WS8 |
+| See the register of approved leave | — | only employees of own positions | yes | WS9 |
+| See salaries or pay rates | — | — | — | never: not stored in the portal |
 
 ### Glossary
 
@@ -91,11 +97,12 @@ manager or an administrator is also an employee and submits their own requests.
 
 - Emails to users: developers' free mail plan allows only 2 emails per hour and only to members of their project.
   Reminders are an in-app marker; an "invitation" is a link from the administrator.
-- Scheduled actions more often than once a day.
+- Scheduled actions more often than once a day: developers' free hosting runs scheduled jobs at most once a day.
 - Salaries, pay rates and payroll calculation: the portal neither stores nor shows them; payroll keeps them
   separately.
 - Approving a record from an email or a message: decisions are made only in the portal.
 - Mobile layout: the portal is designed for a computer.
-- Migrating historical leave records from the previous system.
-- A voice assistant for submitting requests.
+- Migrating historical leave records from the previous system: the portal starts with clean data, and balances
+  begin from the carried-over days the administrator enters.
+- A voice assistant for submitting requests: extra setup effort and a per-minute usage cost; a possible later option.
 - Verifying that the employee actually spoke with the administrator before long Personal leave: reminder only.
