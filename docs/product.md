@@ -141,6 +141,7 @@ every "Then" of slice WS6 is either visible on screen or a rule in the data.
 | AC-LEAVE-19 | unit + e2e | Hours across two blocks are a boundary (unit); the exact message listing both blocks is shown (e2e) |
 | AC-LEAVE-20 | unit + e2e | The end of the first block as a start is a boundary (unit); the exact message is shown (e2e) |
 | AC-LEAVE-21 | e2e | The message for Saturday and the one record for Friday are visible |
+| AC-LEAVE-22 | unit + e2e | The start of the next block as the end is a boundary and the gap is not counted (unit); the record with 3 h is visible (e2e) |
 | AC-DECIDE-01 | database + e2e | A manager must not read records of other positions at all (database); the list on screen does not show them (e2e) |
 | AC-DECIDE-02 | e2e | Both statuses are visible on screen |
 | AC-DECIDE-03 | e2e | The status "Rejected" is visible to the employee in "My requests" |
