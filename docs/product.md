@@ -54,7 +54,7 @@ The "From slice" column says from which slice an action is available; before tha
 | Cancel another employee's record | — | only records of own positions | yes | WS11 |
 | See other employees' balances | — | only employees of own positions | yes | WS6 |
 | See the school calendar | yes | yes | yes | WS7 |
-| Change the school calendar (days off, holidays, early dismissals) | — | — | yes | WS7 |
+| Change the school calendar: add and remove closures (holidays, school breaks, early dismissals) | —, only the administrator | —, only the administrator | yes | WS7 |
 | Create employees, positions, schedules; assign managers and deputies | — | — | yes | WS10 |
 | Change own password | own only | own only | own only | WS10 |
 | Change a user's name or email (including own) | — | — | yes | WS10 |
@@ -81,13 +81,16 @@ The "From slice" column says from which slice an action is available; before tha
 | Responsible manager | A manager assigned by the administrator to a position; receives that position's records | supervisor, boss, administrator |
 | Substitute | An employee who covers for the absent person during a record | deputy (a deputy is a manager, see below), cover |
 | Deputy manager | A manager temporarily assigned by the administrator in place of an absent manager for a date range | substitute manager, backup |
+| School calendar | The list of closures of the whole school for a school year, visible to every signed-in user | timetable, schedule (schedule means a position's weekly hours) |
+| Closure | A named period when the whole school is closed, added by the administrator: whole days from a start date to an end date, or an early dismissal | blackout, exception, day off |
+| Early dismissal | A closure of one date from a given time to the end of the day | short day, half day |
 
 ### Slice roadmap
 
 | Session | Slice (what the user will be able to do) | Requirements | Status |
 |---|---|---|---|
 | WS6 | An employee requests leave according to their schedule, a manager decides on each record, and the employee sees their balance | `01-leave-request.md`, `02-leave-decision.md`, `03-leave-balance.md` | in progress |
-| WS7 | The administrator closes days and hours in the school calendar (holidays, early dismissals), and they cannot be taken as leave | — | planned |
+| WS7 | The administrator closes days and hours in the school calendar (holidays, early dismissals), and they cannot be taken as leave | `04-school-calendar.md` | WS9 — pipeline |
 | WS8 | An employee chooses a substitute for each record, and an assistant can temporarily replace a teacher with an upgrade | — | planned |
 | WS9 | The administrator views and downloads the register of approved leave separately for each division | — | planned |
 | WS10 | The administrator manages employees (including their names and emails), positions, schedules, managers and deputy managers, and every user changes their own password | — | planned |
@@ -115,7 +118,8 @@ bypasses the portal's pages; **unit** — a test of a calculation or a boundary 
 by a person because it cannot be automated. A combination means both are needed: the database or unit test proves
 the rule, the e2e scenario proves what the person sees.
 
-Slice WS7 (school calendar) has no requirements yet, so the table covers slice WS6 only. No criterion needs "manual":
+The table covers slice WS6, the slice already delivered. Slice WS7 (school calendar, `04-school-calendar.md`) is
+written for the pipeline in WS9, which proves each of its criteria with a browser recording. No criterion needs "manual":
 every "Then" of slice WS6 is either visible on screen or a rule in the data.
 
 | AC ID | How we prove it | Why |
