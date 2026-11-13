@@ -55,11 +55,12 @@ The "From slice" column says from which slice an action is available; before tha
 | See other employees' balances | — | only employees of own positions | yes | WS6 |
 | See the school calendar | yes | yes | yes | WS7 |
 | Change the school calendar: add and remove closures (holidays, school breaks, early dismissals) | —, only the administrator | —, only the administrator | yes | WS7 |
-| Create employees, positions, schedules; assign managers and deputies | — | — | yes | WS10 |
-| Change own password | own only | own only | own only | WS10 |
-| Change a user's name or email (including own) | — | — | yes | WS10 |
+| Use the calendar assistant (AI) to get suggested closures | — | — | yes | WS10 |
+| Create employees, positions, schedules; assign managers and deputies | — | — | yes | later |
+| Change own password | own only | own only | own only | later |
+| Change a user's name or email (including own) | — | — | yes | later |
 | Maintain an employee's substitute list | — | only employees of own positions | yes | WS8 |
-| See the register of approved leave | — | only employees of own positions | yes | WS9 |
+| See the register of approved leave | — | only employees of own positions | yes | later |
 | See salaries or pay rates | — | — | — | never: not stored in the portal |
 
 ### Glossary
@@ -92,8 +93,9 @@ The "From slice" column says from which slice an action is available; before tha
 | WS6 | An employee requests leave according to their schedule, a manager decides on each record, and the employee sees their balance | `01-leave-request.md`, `02-leave-decision.md`, `03-leave-balance.md` | in progress |
 | WS7 | The administrator closes days and hours in the school calendar (holidays, early dismissals), and they cannot be taken as leave | `04-school-calendar.md` | WS9 — pipeline |
 | WS8 | An employee chooses a substitute for each record, and an assistant can temporarily replace a teacher with an upgrade | — | planned |
-| WS9 | The administrator views and downloads the register of approved leave separately for each division | — | planned |
-| WS10 | The administrator manages employees (including their names and emails), positions, schedules, managers and deputy managers, and every user changes their own password | — | planned |
+| later | The administrator views and downloads the register of approved leave separately for each division | — | planned |
+| WS10 | The administrator pastes the school-calendar text, the calendar assistant (AI) suggests closures, and the administrator saves them after review | `05-calendar-assistant.md` | WS10 |
+| later | The administrator manages employees (including their names and emails), positions, schedules, managers and deputy managers, and every user changes their own password | — | planned |
 | WS11 | A manager submits a request on behalf of an employee and edits a record's date, hours, leave type or substitute before deciding, and an employee gets a reminder about long Personal leave and cancels an approved record through the manager | — | planned |
 
 ### Out of scope
