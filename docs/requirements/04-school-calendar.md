@@ -51,6 +51,11 @@ chosen in a leave request and do not count as working time in balances.
 - AC-CAL-13: Given manager1@example.test is signed in and is not an administrator. When manager1@example.test tries to close 2026-11-27 directly, bypassing the portal's pages. Then the school calendar is unchanged, and 2026-11-27 is still accepted in a new request.
 - AC-CAL-14: Given nobody is signed in. When a visitor opens the school calendar by a direct link. Then the visitor sees the sign-in page, and no closure names or dates are shown.
 - AC-CAL-15: Given the school calendar has no closures in school year 2026–2027. When an employee opens the school calendar for school year 2026–2027. Then the employee sees the message "No closed days in school year 2026–2027".
+- AC-CAL-16: Given an early dismissal "Teachers' meeting" on Friday 2026-11-20 from 12:00 and an employee whose only schedule block that Friday is 13:00–17:00. When the employee tries to choose 2026-11-20 in a new request. Then the date is not accepted, and the employee sees the message "The school is closed on this day: Teachers' meeting".
+- AC-CAL-17: Given "Winter break" 2026-12-28 – 2027-01-08 and "Staff day" 2027-01-12. When the administrator tries to add "Extra break" from 2027-01-05 to 2027-01-15. Then the closure is not saved, and the administrator sees the message "2027-01-05 is already closed: Winter break, 2027-01-12 is already closed: Staff day".
+- AC-CAL-18: Given the administrator adds a closure for 2027-01-20. When the administrator leaves the name empty and tries to save. Then the closure is not saved, and the administrator sees the message "Enter a name for the closure".
+- AC-CAL-19: Given the administrator adds a closure for 2027-01-20. When the administrator enters a name of 101 characters and tries to save. Then the closure is not saved, and the administrator sees the message "The name can be at most 100 characters".
+- AC-CAL-20: Given an employee with a single position (schedule Fri 08:30–15:30) and an approved "Sick leave" record 2026-11-20 08:30–11:00 counted as used 0.36 (150 of 420 minutes). When the administrator adds the early dismissal "Teachers' meeting" on 2026-11-20 from 12:00. Then the employee's balances still show "Sick leave" used 0.36.
 
 ### Out of scope
 
@@ -70,26 +75,32 @@ chosen in a leave request and do not count as working time in balances.
 - All dates and times are in Kyiv time (Europe/Kyiv), the same for all users.
 - Closures are created by the administrator in the portal; for testing, the developer creates the administrator
   account and any starting closures as test data.
-- A closure has a name of up to 100 characters (for example, "Winter break", "Teachers' meeting").
+- A closure has a name of up to 100 characters (for example, "Winter break", "Teachers' meeting"); the name is
+  required (AC-CAL-18, AC-CAL-19). A closure without dates is not saved, with the message "Enter the start and end
+  dates"; an early dismissal without a closing time is not saved, with the message "Enter the closing time".
 - Whole-day closures include both the start date and the end date. A closure may be a single date (the start date
   equals the end date).
 - An early dismissal closes one date from the given time to the end of the day; the time is chosen with 5-minute
   precision. Schedule blocks that start at or after that time are closed; a block that is running at that time ends
   at that time.
-- A closed day is not a working day (see the glossary): it is not accepted in a new request, as in AC-CAL-03. In a
+- A closed day is not a working day (see the glossary): it is not accepted in a new request, as in AC-CAL-03. The
+  same applies to an early dismissal date on which none of the employee's schedule is left before the closing time:
+  the message names the closure (AC-CAL-16). In a
   multi-date request, a closed date is dropped with its message and the other dates stay, as with a date without
   working hours (AC-LEAVE-21).
 - "Whole day" on an early dismissal date means the schedule blocks before the closing time (AC-CAL-04).
 - Balances count a day's share as the record's minutes ÷ the employee's working minutes on that date that are not
-  closed (AC-CAL-06); the rest of the balance rules are as in `03-leave-balance.md`.
+  closed (AC-CAL-06), calculated when the record is approved. Adding or removing a closure later does not change
+  the share of an already approved record (AC-CAL-20); the rest of the balance rules are as in `03-leave-balance.md`.
 - Records with status "Awaiting decision", "Returned for revision" or "Approved" block closing their date; records
   with status "Rejected" or "Cancelled" do not (AC-CAL-07, AC-CAL-08). For an early dismissal, only records with
   minutes after the closing time block it.
 - Until slice WS11 an approved record cannot be cancelled, so a date with an approved record cannot be closed in
   this slice.
 - When several records block a closure, the message lists all of them, one "date employee-email" pair per record,
-  separated by ", ", in date order.
-- Two closures may not share a date (AC-CAL-11).
+  separated by ", ", in date order; pairs with the same date are in alphabetical order of the employee's email.
+- Two closures may not share a date (AC-CAL-11). When a new closure overlaps several existing ones, the message has
+  one part per existing closure with its first overlapping date, in date order, separated by ", " (AC-CAL-17).
 - The school calendar shows closures of one school year (1 September – 31 August) at a time, in date order; a
   whole-day closure that crosses 31 August is shown in both school years.
 - Removing a closure does not change any leave record: it only makes the days working days again.
@@ -106,3 +117,8 @@ chosen in a leave request and do not count as working time in balances.
 - 2026-11-03 — created; slice WS7 in the roadmap, implemented by the pipeline in WS9 — PM's own decision
 - 2026-11-03 — a day with blocking leave records cannot be closed (AC-CAL-07, AC-CAL-08) — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/20
 - 2026-11-03 — Checked against the checklist: items 1–16 yes. Refusals of two kinds: forbidden role (AC-CAL-12, AC-CAL-13 — direct attempt bypassing the pages) and not signed in (AC-CAL-14); interface state: empty calendar (AC-CAL-15) and error messages (AC-CAL-03, -05, -07, -10, -11). New terms "School calendar", "Closure", "Early dismissal" added to the glossary. Kept on purpose: 15 ACs, more than the 8–12 guideline; AC-CAL-09 checks one behaviour (a removed closure makes the day a working day again) from two sides. AI chat: no.
+- 2026-11-13 — added AC-CAL-16: an early dismissal that leaves no working time is shown as a closed day with its name — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/22
+- 2026-11-13 — added AC-CAL-17 and the assumption: one message part per overlapping closure — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/23
+- 2026-11-13 — added AC-CAL-18, AC-CAL-19 and the assumption on required name, dates and closing time with their messages — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/24
+- 2026-11-13 — added AC-CAL-20 and the assumption: the day share of an approved record is fixed at approval — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/25
+- 2026-11-13 — assumption: pairs with the same date in the blocking message are in alphabetical order of email; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/26
