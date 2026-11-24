@@ -57,15 +57,16 @@ and each position gets its own record that goes to that position's manager.
 - AC-LEAVE-20: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee enters 12:00 as the start on 2026-11-03. Then no request is created, and the employee sees the message "12:00 is the end of working time and can only be chosen as the end of leave".
 - AC-LEAVE-21: Given an employee with the schedule Mon–Fri 08:30–15:30. When the employee chooses Friday 2026-11-06 and Saturday 2026-11-07 in one whole-day request and confirms. Then Saturday is not accepted with the message "You have no working hours on this day", and 1 record is created, for 2026-11-06.
 - AC-LEAVE-22: Given a position with the schedule blocks Tue 08:30–12:00 and 12:30–15:30. When the employee requests "Personal leave" on 2026-11-03 from 09:00 to 12:30. Then 1 record 2026-11-03 09:00–12:30 is created with a duration of 3 h (the gap 12:00–12:30 is not counted).
+- AC-LEAVE-23: Given an employee with the schedule Mon–Fri 08:30–15:30. When the employee requests "Personal leave" for the whole days Monday 2026-12-07 and Tuesday 2026-12-08 (2.00 days) and opens the summary. Then the employee sees the reminder "Personal leave of 2 days or more: please talk to the administrator before you go", and after confirming, the request is created with 2 records.
+- AC-LEAVE-24: Given an employee with the schedule Mon–Fri 08:30–15:30. When the employee requests "Personal leave" for the whole day 2026-12-07 and for 2026-12-08 from 08:30 to 12:00 in one request (1.50 days in total) and opens the summary. Then the employee does not see the reminder about Personal leave of 2 days or more.
 
 ### Out of scope
 
 - Holidays, school breaks and early dismissals in the school calendar — slice WS7; in this slice a working day is
   defined only by the position's schedule.
-- Choosing a substitute and the assistant upgrade — slice WS8.
-- A manager or administrator submitting a request on behalf of an employee — slice WS11.
-- The reminder to talk to the administrator about Personal leave of 2 or more days — slice WS11.
-- An employee cancelling an approved record — slice WS11.
+- Choosing a substitute and the assistant upgrade — requirement `06-substitutes.md`.
+- A manager or administrator submitting a request on behalf of an employee — requirement `08-on-behalf-and-edit.md`.
+- An employee cancelling an approved record — requirement `09-cancel-approved.md`.
 - The warning about exceeding the balance — requirement `03-leave-balance.md`.
 
 ### Assumptions
@@ -96,6 +97,9 @@ and each position gets its own record that goes to that position's manager.
   edited is not checked against itself.
 - An employee may request a date in the past (for example, sick leave after the fact). There is no limit on how many
   days ahead or back a request can be made (confirmed by PM).
+- The reminder about long Personal leave (AC-LEAVE-23) appears in the summary when the request's "Personal leave" totals
+  2.00 days or more by the day-share rule of `03-leave-balance.md`; it is a reminder only and never stops the request.
+  It is also shown to a manager submitting on behalf of the employee (`08-on-behalf-and-edit.md`).
 - No amounts of money anywhere in this requirement: time is counted in minutes, displayed to the minute.
 
 ### Open questions
@@ -121,3 +125,4 @@ None.
 - 2026-10-23 — assumption added: leave type and status are always shown as text, colour only in addition; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/14
 - 2026-10-23 — assumption added: "My requests" is a list, a calendar view is optional; no AC changed — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/15
 - 2026-11-03 — added AC-LEAVE-22 and clarified the assumption: the end of leave may equal the start of the next schedule block, only minutes inside blocks count — https://github.com/mkozlovskyi-ops/course-staff-management-spec/issues/21
+- 2026-11-24 — added AC-LEAVE-23, AC-LEAVE-24 and the assumption on the long Personal leave reminder (roadmap row WS11); Out of scope now points to requirements 06, 08, 09 — PM's own decision

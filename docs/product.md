@@ -47,19 +47,23 @@ The "From slice" column says from which slice an action is available; before tha
 | Change the hours of own record with status "Awaiting decision" or "Returned for revision" | own only | own only | own only | WS6 |
 | Cancel own record with status "Awaiting decision" or "Returned for revision" | own only | own only | own only | WS6 |
 | Cancel own approved record (through the manager) | own only | own only | own only | WS11 |
+| Confirm or decline a request to cancel an approved record | — | only records of own positions, never own records | yes | WS11 |
 | Submit a request on behalf of another employee | — | only employees of own positions | yes | WS11 |
 | See other employees' leave records | — | only records of own positions | yes | WS6 |
 | Approve, reject or return a record for revision | — | only records of own positions, never own records | yes | WS6 |
 | Change another employee's record before deciding (date, hours, leave type, substitute) | — | only records of own positions | yes | WS11 |
-| Cancel another employee's record | — | only records of own positions | yes | WS11 |
+| Cancel another employee's approved record with a note | — | only records of own positions | yes | WS11 |
 | See other employees' balances | — | only employees of own positions | yes | WS6 |
 | See the school calendar | yes | yes | yes | WS7 |
 | Change the school calendar: add and remove closures (holidays, school breaks, early dismissals) | —, only the administrator | —, only the administrator | yes | WS7 |
 | Use the calendar assistant (AI) to get suggested closures | — | — | yes | WS10 |
 | Create employees, positions, schedules; assign managers and deputies | — | — | yes | later |
+| Deactivate an employee | — | — | yes | later |
+| Decide records of an absent manager's positions as a deputy | — | only on the days of the deputy assignment made by the administrator | yes | later |
 | Change own password | own only | own only | own only | later |
 | Change a user's name or email (including own) | — | — | yes | later |
 | Maintain an employee's substitute list | — | only employees of own positions | yes | WS8 |
+| See own substitutions (records where one covers for someone) | yes | yes | yes | WS8 |
 | See the register of approved leave | — | only employees of own positions | yes | later |
 | See salaries or pay rates | — | — | — | never: not stored in the portal |
 
@@ -85,6 +89,11 @@ The "From slice" column says from which slice an action is available; before tha
 | School calendar | The list of closures of the whole school for a school year, visible to every signed-in user | timetable, schedule (schedule means a position's weekly hours) |
 | Closure | A named period when the whole school is closed, added by the administrator: whole days from a start date to an end date, or an early dismissal | blackout, exception, day off |
 | Early dismissal | A closure of one date from a given time to the end of the day | short day, half day |
+| Substitute list | The employees a manager allows as substitutes for one employee; the employee chooses a substitute only from it | cover pool, backup list |
+| Upgrade | The mark "With upgrade" with minutes on a record where an assistant substitutes for a teacher; payroll pays it, the portal stores no money | promotion, bonus |
+| One-time link | A link the administrator gives a new employee to set their password; works once and for 7 days | invitation email, activation email |
+| Deactivated employee | An employee who can no longer sign in; their records and balances stay in history | deleted, removed, archived user |
+| Cancellation request | An employee's request to cancel an own approved record; a manager confirms or declines it | cancel request, withdrawal |
 
 ### Slice roadmap
 
@@ -92,11 +101,11 @@ The "From slice" column says from which slice an action is available; before tha
 |---|---|---|---|
 | WS6 | An employee requests leave according to their schedule, a manager decides on each record, and the employee sees their balance | `01-leave-request.md`, `02-leave-decision.md`, `03-leave-balance.md` | in progress |
 | WS7 | The administrator closes days and hours in the school calendar (holidays, early dismissals), and they cannot be taken as leave | `04-school-calendar.md` | WS9 — pipeline |
-| WS8 | An employee chooses a substitute for each record, and an assistant can temporarily replace a teacher with an upgrade | — | planned |
+| WS8 | An employee chooses a substitute for each record, and an assistant can temporarily replace a teacher with an upgrade | `06-substitutes.md` | requirements ready |
 | later | The administrator views and downloads the register of approved leave separately for each division | — | planned |
 | WS10 | The administrator pastes the school-calendar text, the calendar assistant (AI) suggests closures, and the administrator saves them after review | `05-calendar-assistant.md` | WS10 |
-| later | The administrator manages employees (including their names and emails), positions, schedules, managers and deputy managers, and every user changes their own password | — | planned |
-| WS11 | A manager submits a request on behalf of an employee and edits a record's date, hours, leave type or substitute before deciding, and an employee gets a reminder about long Personal leave and cancels an approved record through the manager | — | planned |
+| later | The administrator manages employees (including their names and emails), positions, schedules, managers and deputy managers, and every user changes their own password | `07-staff-management.md` | requirements ready |
+| WS11 | A manager submits a request on behalf of an employee and edits a record's date, hours, leave type or substitute before deciding, and an employee gets a reminder about long Personal leave and cancels an approved record through the manager | `08-on-behalf-and-edit.md`, `09-cancel-approved.md`, AC-LEAVE-23 and AC-LEAVE-24 in `01-leave-request.md` | requirements ready |
 
 ### Out of scope
 
